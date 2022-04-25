@@ -1,0 +1,21 @@
+header,#about,#contact {
+    height: 100vh;
+}
+
+.contactBox {
+    color: brown;
+}
+
+.menuBtn{
+    font-size: 40px;
+}
+
+.dark{
+    background-color: black;
+    color: white;
+}
+
+.light{
+    background-color: #fff;
+    color: black;
+}
