@@ -27,5 +27,8 @@ let contact = about.nextElementSibling;
 // side note: to get the element's name (tag) you can use .nodeName method as follows
 console.log(about.nodeName);
 
+
+
+
 let html = document.querySelector('html')
     html.style.backgroundColor='red'
