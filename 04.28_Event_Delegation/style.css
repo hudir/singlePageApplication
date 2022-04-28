@@ -1,0 +1,11 @@
+.d-none{
+    display: none;
+}
+.d-block{
+    display: block;
+}
+
+div{
+    border: 5px red solid;
+    padding: 20px;
+}
