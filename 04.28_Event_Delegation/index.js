@@ -19,7 +19,7 @@ tree[0].addEventListener('click', (e)=>{
     // console.log(e.target.nextElementSibling.className);
 
     
-    if(e.target.tagName == 'SPAN'){
+    if(e.target.tagName == 'SPAN' && e.target.parentElement.querySelector('ul')){
         // if (!e.target.firstChild) return
 
         // let nestedList = e.target.parentNode.querySelector('ul')
@@ -39,6 +39,20 @@ tree[0].addEventListener('click', (e)=>{
     }
 })
 
+
+// ghaasan's code
+// tree[0].addEventListener('click', (e)=>{
+//     if(e.target.tagName=='SPAN'){
+
+//         const hiddUl = e.target.parentElement.querySelector('ul')
+//         console.log(hiddUl);
+
+//         if(hiddUl) {
+//             hiddUl.hidden=!hiddUl.hidden 
+//         }
+        
+//     }
+// })
 
 
 
