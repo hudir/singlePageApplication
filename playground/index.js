@@ -6,3 +6,5 @@ const getTodo = callback => {
 getTodo(todo => {
     console.log(todo.text)
 })
+
+console.log(9 % 3 == 0);
