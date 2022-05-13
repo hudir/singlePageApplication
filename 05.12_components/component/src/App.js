@@ -1,16 +1,16 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 const animals = [
   { label: "cat" },
   { label: "Turtle" },
-  { label: "Elephan" },
+  { label: "dog" },
   { label: "Monkey" },
   { label: "Horse" }
 ];
 
 function App() {
-  const var1='hudir';
+  const var1='hud';
 
   return (
     <div className="App">
