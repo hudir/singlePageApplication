@@ -32,3 +32,6 @@ export default class Header extends Component {
   }
 }
 ```
+
+
+props is the massager from the parent to child component
