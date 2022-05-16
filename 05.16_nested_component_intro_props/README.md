@@ -2,6 +2,9 @@
 
 # || chain returns the first ture value or the last falsh value
 
+Operator precedence
+The AND operator has a higher precedence than the OR operator, meaning the && operator is executed before the || operator 
+
 
 ## rfc ==> reactFunctionComponent
 

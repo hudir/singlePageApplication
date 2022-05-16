@@ -30,9 +30,7 @@ export default function Header() {
 
 
 
-        <Nav myToggle={bgcToggle} username={user}>
-        
-        </Nav>
+        <Nav myToggle={bgcToggle} username={user}></Nav>
 
 
         {x ? (<ul style={{ backgroundColor: 'red' 
