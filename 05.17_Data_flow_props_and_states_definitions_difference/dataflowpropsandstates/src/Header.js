@@ -5,9 +5,9 @@ export default function Header() {
     const [colorSwtich, funcChangesColor] = useState(true)
   return (
     <div className={colorSwtich ? 'bg-dark text-light' : 'bg-light'}>Header
-    <button onClick={e=>funcChangesVar1(!var1)}>hidd my Toggle h1</button>
+    <button className='btn btn-primary m-3' onClick={e=>funcChangesVar1(!var1)}>{var1 ? 'H 🙉 OO' :'N 🙈 OO'}</button>
 
-    <button onClick={e=>funcChangesColor(!colorSwtich)}>Change Color</button>
+    <button className='btn btn-primary m-3' onClick={e=>funcChangesColor(!colorSwtich)}>Change Color</button>
         {var1 && <h1>i will hidd!!!!!!!!!</h1>}
     </div>
   )

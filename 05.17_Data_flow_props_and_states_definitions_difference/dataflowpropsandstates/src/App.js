@@ -1,5 +1,6 @@
 
 import Header from './Header';
+import User from './User';
 
 function App(props) {
   // let keyArr= Object.keys(props)
@@ -12,7 +13,12 @@ function App(props) {
   //     }
   //   </div>
   // );
-  return (<Header />)
+  return (
+    <div>
+      <Header />
+      <User />
+    </div>
+  )
 }
 
 export default App;
