@@ -45,7 +45,10 @@
 
 
  // luck number (name) ==> 1 digit number
-      n='john'.toUpperCase().split('').reduce((a,x)=>x.match(/[A-Z]/) && a+ +x.charCodeAt() -64,0)
-      console.log(n)
-    while(n>9) n=n.toString().split('').reduce((a,x)=>a+ +x,0)
-     console.log(n)
+    //   n='john'.toUpperCase().split('').reduce((a,x)=>x.match(/[A-Z]/) && a+ +x.charCodeAt() -64,0)
+    //   console.log(n)
+    // while(n>9) n=n.toString().split('').reduce((a,x)=>a+ +x,0)
+    //  console.log(n)
+
+
+    console.log(10000**2);
