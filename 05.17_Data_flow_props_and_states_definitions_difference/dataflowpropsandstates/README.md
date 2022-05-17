@@ -1,6 +1,9 @@
 # react state
 
-## if state changed, react will rerender page
+## if state changed, react will rerender page => this is why we ues state
+
+## Don't put arr and obj inside a component functions, will get bug
+
 
 
 - step 1
