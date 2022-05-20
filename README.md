@@ -114,3 +114,52 @@ class Welcome extends React.Component {
     );
   }
 };
+
+
+
+# useEffect
+
+When you call the hook, you pass it a function. The function will be run by React when the component is first rendered, and on every subsequent re-render/update.
+
+React first updates the DOM, then calls any function passed to useEffect().
+
+All without blocking the UI rendering, even on blocking code.
+
+```
+const { useEffect, useState } = React
+
+const CounterWithNameAndSideEffect = () => {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log(`You clicked ${count} times`)
+  })
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  )
+}
+```
+
+
+Since the useEffect() function is run on every subsequent re-render/update of the component, we can tell React to skip it, for performance purposes. We do this by adding a second parameter which is an array that contains a list of state variables to watch for.
+
+React will only re-run the side effect if one of the items in this array changes.
+
+```
+useEffect(() => {
+  console.log(`Hi ${name} you clicked ${count} times`)
+}, [name, count])
+```
+
+
+Similarly, you can tell React to only execute the side effect once (at mount time), by passing an empty array:
+
+```
+useEffect(() => {
+  console.log(`Component mounted`)
+}, [])
+```
