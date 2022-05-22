@@ -163,3 +163,25 @@ useEffect(() => {
   console.log(`Component mounted`)
 }, [])
 ```
+
+
+## set default props and props types
+
+```
+const Camper=(props)=>{
+  return (
+    <p>{props.name}</p>
+  )
+}
+
+Camper.defaultProps = {name: 'CamperBot' }
+Camper.propTypes = {
+  name: PropTypes.string.isRequired
+}
+```
+[ddd]https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes
+
+
+# state
+
+Note that if you make a component stateful, no other components are aware of its state. Its state is completely encapsulated, or local to that component, unless you pass state data to a child component as props. This notion of encapsulated state is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
