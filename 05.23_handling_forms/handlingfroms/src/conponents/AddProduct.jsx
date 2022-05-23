@@ -3,23 +3,51 @@ import React from 'react'
 import RenderProductList from './RenderProductList';
 
 export default function AddProduct() {
-    const [products, setProducts] = React.useState({});
+
+    const [isSold, setIsSold] = React.useState(false)
+    const [products, setProducts] = React.useState({'isSold':isSold});
     const [productList, setProductList] = React.useState([]);
 
+      // for sold button on Product Card
+    const handleIsSold = index =>{
+        const newList = (productList.map((el,i)=>{
+            if(index===i){
+                 el.isSold=!el.isSold
+                // return {...el, isSold: !el.isSold}
+                return el
+            } else return el
+        }))
+        setProductList(newList)
+    }
+
+    // for delete button on Product Card
+    const handleDelete = index =>{
+        const newList = productList.filter((el,i)=>i!==index)
+        setProductList(newList)
+    }
+
+    // to store input value in products Object
     const handleChange=e=>{
         // everything in [ ] will be string ?
         // setUserInput({...userInput ,[e.target.name]: e.target.value}); 
         setProducts(prev=> ({...prev, [e.target.name]: e.target.value}))
-       
         }
 
+    // for add button
     const handleSubmit=e=>{
         e.preventDefault();
         console.log(products)
-        setProductList(prev=> [...prev, products])
-        setProducts({})
+
+        // check if there is already the product in productList
+        if(!productList.some(el=>el.name===products.name)) {
+            setProductList(prev=> [...prev, products])
+            setProducts({'isSold':isSold})
         
-        document.querySelectorAll('.fInput').forEach(el=>el.value='')
+            document.querySelectorAll('.fInput').forEach(el=>el.value='')
+        } else {
+            alert("there is already this product: "+products.name)
+        }
+        
         // console.log(productList)
     }
 
@@ -60,7 +88,7 @@ export default function AddProduct() {
             <button>Add</button>
         </form>
 
-        <RenderProductList productList={productList}/>
+        <RenderProductList productList={productList} handleIsSold={handleIsSold} handleDelete={handleDelete}/>
        
     </div>
   )
