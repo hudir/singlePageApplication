@@ -51,4 +51,18 @@
     //  console.log(n)
 
 
-    console.log(10000**2);
+   //  console.log(10000**2);
+
+   const objX= {
+      x:999,
+      showX: function(){
+         return this.x
+      }
+   }
+
+
+   const unboundShowX = objX.showX
+   console.log(unboundShowX());
+
+   const boundShowX = unboundShowX.bind(objX)
+   console.log(boundShowX());
