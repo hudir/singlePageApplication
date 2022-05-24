@@ -24,9 +24,22 @@ export default function Signup() {
 
     const formSubmitHandle=e=>{
         e.preventDefault();
-        console.log(user);
-    }
+        // console.log(user);
 
+        // POST Object to server
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {'Content-type': 'application/json; charset=UTF-8'}
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json); 
+            json.subscription ==='no subscription' ? alert('Think about it one more time!') : alert('Hi '+ json.username+', thank your for your subscription, your ID is '+ json.id)
+        })
+        .catch(err=> alert('something bad happened \n' + err))
+
+    }
 
 
 
