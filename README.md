@@ -188,3 +188,21 @@ Camper.propTypes = {
 
 - React expects you to never modify state directly, instead always use this.setState() when state changes occur. Also, you should note that React may batch multiple state updates in order to improve performance. What this means is that state updates through the setState method can be asynchronous. There is an alternative syntax for the setState method which provides a way around this problem. This is rarely needed but it's good to keep it in mind! Please consult the React documentation for further details.
 [https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous]
+
+
+Sometimes you might need to know the previous state when updating the state. However, state updates may be asynchronous - this means React may batch multiple setState() calls into a single update. This means you can't rely on the previous value of this.state or this.props when calculating the next value. So, you should not use code like this:
+
+this.setState({
+  counter: this.state.counter + this.props.increment
+});
+Instead, you should pass setState a function that allows you to access state and props. Using a function with setState guarantees you are working with the most current values of state and props. This means that the above should be rewritten as:
+
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+You can also use a form without props if you need only the state:
+
+this.setState(state => ({
+  counter: state.counter + 1
+}));
+Note that you have to wrap the object literal in parentheses, otherwise JavaScript thinks it's a block of code.
