@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 //   import { fab } from '@fortawesome/free-brands-svg-icons'
   import { fas } from '@fortawesome/free-solid-svg-icons'
+  import { Button, Input } from 'reactstrap';
 
   library.add( fas)
 
@@ -136,14 +137,14 @@ export default function Header() {
     <div>
         <h1>My Memo List</h1>
 
-        <input type="text" /> <button onClick={e=>{
+        <Input type="text" /> <Button color='warning' onClick={e=>{
             let str = e.target.previousElementSibling.value
             if (str){
                 
                 setArchive(prev=> ([...prev, str]))
                 e.target.previousElementSibling.value = '';
             }
-        }}>Add Archive</button>
+        }}>Add Archive</Button>
        
         {/* <div>
            {aList.map((el,i)=> (<Listitem obj={el} key={i} index={i} handleDelete={handleDelete} handleEdit={handleEdit} handleSubTask={handleSubTask} archive={archive} handleArc={handleArc} handleRadio={handleRadio}      />) )}
@@ -154,7 +155,7 @@ export default function Header() {
          <main>
 
          {archive.map((str,n)=>{
-            return <ul key={n}> {str} <button onClick={(e)=>handleDelArc(n,e)}><FontAwesomeIcon icon="fa-solid fa-ban" size='sm'/></button>
+            return <ul key={n}> {str} <Button color="danger" onClick={(e)=>handleDelArc(n,e)}><FontAwesomeIcon icon="fa-solid fa-ban" size='sm'/></Button>
                 {aList.map((el,i)=> {
                     if (el.arc===str) {
                         return (<Listitem obj={el} key={i} index={i} handleDelete={handleDelete} handleEdit={handleEdit} handleSubTask={handleSubTask} archive={archive} handleArc={handleArc} handleRadio={handleRadio}      />)
@@ -166,8 +167,8 @@ export default function Header() {
 
          </main>
 
-         <input type="text" name='memo' onChange={inputChangeHandle}/>
-        <button onClick={addToListHandle}>Add List Item</button>
+         <Input type="text" name='memo' onChange={inputChangeHandle}/>
+        <Button  color="info" onClick={addToListHandle}>Add List Item</Button>
         
 
         {trash.length !==0 
@@ -176,7 +177,7 @@ export default function Header() {
             <h2>Trash Box</h2>
 
             {trash.map((str,n)=>{
-            return <ul key={n}> {str} <button onClick={(e)=>handleDelArc2(n,e)}>x</button>
+            return <ul key={n}> {str} <Button color="danger" onClick={(e)=>handleDelArc2(n,e)}>x</Button>
                 {aList.map((el,i)=> {
                     if (el.arc===str) {
                         return (<Listitem obj={el} key={i} index={i} handleDelete={handleDelete} handleEdit={handleEdit} handleSubTask={handleSubTask} archive={archive} handleArc={handleArc} handleRadio={handleRadio}      />)
