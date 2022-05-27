@@ -81,8 +81,8 @@ export default function Form() {
           {user.err.username && (<p>{user.errMsg.username}</p>)}
         </div>
 
-        <div>email:
-          <input type="email" name='email' value={user.data.email} onChange={handler}/>
+        <div>__email__:
+          <input type="text" name='email' value={user.data.email} onChange={handler}/>
           {user.err.email && (<p>{user.errMsg.email}</p>)}
         </div>
 
