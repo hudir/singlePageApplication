@@ -206,3 +206,13 @@ this.setState(state => ({
   counter: state.counter + 1
 }));
 Note that you have to wrap the object literal in parentheses, otherwise JavaScript thinks it's a block of code.
+
+
+## lifecycle hooks
+
+some of the main lifecycle methods: 
+- componentWillMount() 
+- componentDidMount() 
+- shouldComponentUpdate() 
+- componentDidUpdate() 
+- componentWillUnmount()
