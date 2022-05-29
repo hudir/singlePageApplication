@@ -211,8 +211,14 @@ Note that you have to wrap the object literal in parentheses, otherwise JavaScri
 ## lifecycle hooks
 
 some of the main lifecycle methods: 
-- componentWillMount() 
+
+- componentWillMount()  emoved in version 17  The componentWillMount() method is called before the render() method when a component is being mounted to the DOM. 
 - componentDidMount() 
 - shouldComponentUpdate() 
 - componentDidUpdate() 
 - componentWillUnmount()
+
+
+componentDidMount(). This method is called after a component is mounted to the DOM. Any calls to setState() here will trigger a re-rendering of your component. When you call an API in this method, and set your state with the data that the API returns, it will automatically trigger an update once you receive the data.
+
+This challenge has you modifying two lifecycle methods componentDidMount and componentWillUnmount. You use componentDidMount when you want to set something up, in your case, an event listener. You use componentWillUnmount when you need to clear that something, your event listener.
