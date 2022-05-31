@@ -28,8 +28,9 @@ export default class User extends Component {
         .then((data) => this.setState({users: data}));
     }
 
-    componentDidUpdate(){
-        console.log("from ComponentDidUpdate")
+    componentDidUpdate(prevProps, prevState, snapShot){
+        console.log("from ComponentDidUpdate",prevProps)
+        snapShot && console.log(snapShot);
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -49,6 +50,15 @@ export default class User extends Component {
             return {x:123}
         } else return null
     }
+
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        if('myProp' in prevProps) {
+            console.log("from getSnapshotBeforeUpdate");
+            return "from snaaaaaaaaap"
+        }
+        console.log("from getSnapshotBeforeUpdate");
+        return null
+    }
   
     render() {
         console.log('from render', this.state)
@@ -56,7 +66,7 @@ export default class User extends Component {
             <div>User
                 <button onClick={this.anotherFunc}>say hi</button>
                 {this.state.hi && (<p>{this.state.anotherOne}</p>)}
-                {this.state.users && this.state.users.map((el,i)=>( <p key={i}>{JSON.stringify({username:el.username/* ,name:el.name,email:el.email */})}</p>  ))}
+                {this.state.users && this.state.users.map((el,i)=>( <p key={i}>{JSON.stringify(el.username/* ,name:el.name,email:el.email */)}</p>  ))}
             </div>
     )
   }
