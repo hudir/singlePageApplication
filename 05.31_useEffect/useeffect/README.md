@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+https://dmitripavlutin.com/react-useeffect-explanation/
+```
+useEffect(callback[, dependencies]);
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Put your side-effect logic into the callback function, then use the dependencies argument to control when you want the side-effect to run. That's the sole purpose of useEffect().
 
-## Available Scripts
 
-In the project directory, you can run:
+- A) Not provided: the side-effect runs after every rendering.
 
-### `npm start`
+import { useEffect } from 'react';
+function MyComponent() {
+  useEffect(() => {
+    // Runs after EVERY rendering
+  });  
+}
+- B) An empty array []: the side-effect runs once after the initial rendering.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+import { useEffect } from 'react';
+function MyComponent() {
+  useEffect(() => {
+    // Runs ONCE after initial rendering
+  }, []);
+}
+- C) Has props or state values [prop1, prop2, ..., state1, state2]: the side-effect runs only when any depenendecy value changes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+import { useEffect, useState } from 'react';
+function MyComponent({ prop }) {
+  const [state, setState] = useState('');
+  useEffect(() => {
+    // Runs ONCE after initial rendering
+    // and after every rendering ONLY IF `prop` or `state` changes
+  }, [prop, state]);
+}
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Some side-effects need cleanup: close a socket, clear timers.
 
-### `npm run build`
+If the callback of useEffect(callback, deps) returns a function, then useEffect() considers this as an effect cleanup:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Cleanup works the following way:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A) After initial rendering, useEffect() invokes the callback having the side-effect. cleanup function is not invoked.
 
-### `npm run eject`
+B) On later renderings, before invoking the next side-effect callback, useEffect() invokes the cleanup function from the previous side-effect execution (to clean up everything after the previous side-effect), then runs the current side-effect.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+C) Finally, after unmounting the component, useEffect() invokes the cleanup function from the latest side-effect.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Note that the callback argument of useEffect(callback) cannot be an async function. But you can always define and then invoke an async function inside the callback itself:
+```
+import { useEffect, useState } from 'react';
+function FetchEmployees() {
+  const [employees, setEmployees] = useState([]);
+  useEffect(() => {
+    async function fetchEmployees() {
+      const response = await fetch('/employees');
+      const fetchedEmployees = await response.json(response);
+      setEmployees(fetchedEmployees);
+    }
+    fetchEmployees();
+  }, []);
+  return (
+    <div>
+      {employees.map(name => <div>{name}</div>)}
+    </div>
+  );
+}
+```
