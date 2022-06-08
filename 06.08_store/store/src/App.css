@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.removeItem {
+  font-size: large;
+}
+
+span.removeItem:hover {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
