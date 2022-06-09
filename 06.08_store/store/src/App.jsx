@@ -1,24 +1,21 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import Form from './components/Form';
 import ListGroup from './components/ListGroup';
+import { ToastContainer } from 'react-toastify';
+import Modal from './components/Modal';
+import Context from './store/context';
 
 function App() {
-
-  const [todos, setTodos] = useState([])
-
-  const onAddTodo = todo => setTodos([...todos, todo])
-
-  const onDeleteTodo = index => {
-    const newList = todos.filter((x,i)=>index!==i);
-    setTodos(newList)
-    
-  }
-
+  const {editTodo} = useContext(Context);
+ 
   return (
     <div className="container mt-4 w-20">
-      <Form onAddTodo={onAddTodo}/>
-      <ListGroup todos={todos} onDeleteTodo={onDeleteTodo}/>
+      <Form />
+      <ListGroup />
+      {editTodo && <Modal />}
+      <ToastContainer />
+      
     </div>
   );
 }

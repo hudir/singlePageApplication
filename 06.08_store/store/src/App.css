@@ -45,3 +45,16 @@ span.removeItem:hover {
   font-weight: bold;
   cursor: pointer;
 }
+
+.editItem:hover {
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+
+.Modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+}
