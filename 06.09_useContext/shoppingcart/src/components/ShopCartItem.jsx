@@ -4,7 +4,7 @@ import { Context } from '../store/context'
 export default function ShopCartItem({x}) {
     const {removeItem}=useContext(Context)
   return (
-    <li>
+    <li className='list-group-item border-none'>
         <h3>{x.title} </h3>
         <h4>Price: {x.price}</h4>
         <h4>Qty: {x.inventory}</h4>

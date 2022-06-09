@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
-import list from "../json/list.json"
+import React, { useEffect, useState } from "react";
+import list from "../json/list.json";
+import { toast } from "react-toastify";
 
 export const Context = React.createContext()
 
@@ -11,6 +12,7 @@ export function ContextProvider({children}){
 
     useEffect(()=>{
         // console.log(typeof list)
+        // console.log(Boolean(null))
         // const newList=JSON.parse(list)
         if(!prodList) setProdList(list)
         else setProdList(prodList.sort((a,b)=>a.id-b.id));
@@ -36,6 +38,7 @@ export function ContextProvider({children}){
                 const newProdList = prodList.map((x,i)=> x.id === obj.id ? {...x, inventory: x.inventory-1} : x);
                 
                 setProdList(newProdList.filter(x=>x.inventory!==0))
+                toast(obj.title+' has added to cart')
                
            } else if (e.target.name === "addAll") {
                 // add all item to cartList
@@ -45,11 +48,13 @@ export function ContextProvider({children}){
                 // update prodList
                 const newProdList = prodList.filter((x,i)=> x.id !== obj.id)
                 setProdList(newProdList)
+                toast(obj.inventory+ " "+obj.title+' has added to cart')
            }  
           //  cartList do not have the item
         } else {
             if (e.target.name==="addOne") {
                 // add one item to cartList
+               
                 const NewObj = {...obj};
                 NewObj.inventory = 1
                 setCartList([...cartList,NewObj])
@@ -58,6 +63,7 @@ export function ContextProvider({children}){
                 const newProdList = prodList.map((x,i)=> x.id === obj.id ? {...x, inventory: x.inventory-1} : x);
                 
                 setProdList(newProdList.filter(x=>x.inventory!==0))
+                toast(obj.title+' has added to cart')
                
            } else if (e.target.name === "addAll") {
                 // add all item to cartList
@@ -66,6 +72,7 @@ export function ContextProvider({children}){
                 // update prodList
                 const newProdList = prodList.filter((x,i)=> x.id !== obj.id)
                 setProdList(newProdList)
+                toast(obj.inventory+ " "+obj.title+' has added to cart')
            }  
         }      
     }
@@ -82,7 +89,16 @@ export function ContextProvider({children}){
                 // update cartList
                 const newCartList = cartList.map((x,i)=> x.id === obj.id ? {...x, inventory: x.inventory-1} : x);
                 
-                setCartList(newCartList.filter(x=>x.inventory!==0))
+                setCartList(newCartList.filter(x=>x.inventory!==0));
+                toast.warn(obj.title+'has been removed', {
+                    position: "top-center",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
                
            } else if (e.target.name === "removeAll") {
                 // add all item to prodList
@@ -91,7 +107,16 @@ export function ContextProvider({children}){
                 
                 // update cartList
                 const NewCartList = cartList.filter((x,i)=> x.id !== obj.id)
-                setCartList(NewCartList)        
+                setCartList(NewCartList);
+                toast.warn(obj.inventory+ " " +obj.title+'has been removed', {
+                    position: "top-center",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });      
            }  
           //  ProdLst do not have the item
         } else {
@@ -106,6 +131,15 @@ export function ContextProvider({children}){
                 const newCartList = cartList.map((x,i)=> x.id === obj.id ? {...x, inventory: x.inventory-1} : x);
                 
                 setCartList(newCartList.filter(x=>x.inventory!==0))
+                toast.warn(obj.title+'has been removed', {
+                    position: "top-center",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
                
            } else if (e.target.name === "removeAll") {
                 // add all item to prodList
@@ -114,6 +148,15 @@ export function ContextProvider({children}){
                 // update cartList
                 const newCartList = cartList.filter((x,i)=> x.id !== obj.id)
                 setCartList(newCartList)
+                toast.warn(obj.inventory+ " " +obj.title+'has been removed', {
+                    position: "top-center",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });  
            }  
         }          
     }
@@ -125,7 +168,8 @@ export function ContextProvider({children}){
             addToCart,
             cartList,
             totalCost,
-            removeItem
+            removeItem,
+            setCartList
         }}>{children}</Context.Provider>
     )
 }
