@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Create a Shopping Cart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The user should see a Product List of items with: - Description of the product - Price - Quantity available (inventory).
 
-## Available Scripts
+The user should be able to add items to the Shopping Cart until the quantity available is sold out.
 
-In the project directory, you can run:
+The user should be able to see the Shopping Cart at all times.
 
-### `npm start`
+The user should be able to remove one item or remove all items from the Shopping Cart and the item or items will be returned to the Product List of items.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The total amount should be updated every time you add or remove an item.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Once the user clicks the checkout button the items will be removed from the Shopping Cart, the total amount will go back to 0 and the main Product List of items will show the current amount of items available after the last purchase.
 
-### `npm test`
+Make sure to use components Examples of components: ProductList, ProdListItem, ShoppingCart, ShopCartItem.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Use Create React App
 
-### `npm run build`
+use React.useContext
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Use this list of items, saved them as a JSON file:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[
+  {"id": 1, "title": "iPad 4 Mini", "price": 500.01, "inventory": 2},
+  {"id": 2, "title": "H&M T-Shirt White", "price": 10.99, "inventory": 10},
+  {"id": 3, "title": "Charli XCX - Sucker CD", "price": 19.99, "inventory": 5}
+]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Bonuses
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Make you own list of items
+Add more product items
+Add images to your items
