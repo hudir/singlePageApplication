@@ -12,8 +12,8 @@ function App() {
 
       <h1 className="my-5 text-center text-primary">There-is-a-Shop</h1>
       <div className="row">
-        <div className="col-8"> <ProductList className='prod'/></div>
-        <div className="col-4"> <ShoppingCart className='cart'/></div>
+        <div className="col-9"> <ProductList className='prod'/></div>
+        <div className="col-3"> <ShoppingCart className='cart'/></div>
       </div>
 
       <ToastContainer

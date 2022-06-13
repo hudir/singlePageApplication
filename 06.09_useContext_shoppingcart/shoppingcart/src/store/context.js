@@ -9,13 +9,26 @@ export function ContextProvider({children}){
     const [prodList, setProdList] = useState(null);
     const [cartList, setCartList] = useState([]);
     const [totalCost, setTotalCost] = useState(0)
+    // , [fakeStore, setFakeStore]  = useState(null)
+
+    useEffect(()=>{
+        fetch('https://fakestoreapi.com/products')
+            .then(res=>res.json())
+            .then(json=>{          
+                const jsonData = (json.map(x=>({...x,inventory:19})))
+                // setProdList(prev=> [...prev,...jsonData] )
+                // console.log(prodList);  
+                setProdList([...jsonData,...list])            
+            })
+    },[])
 
     useEffect(()=>{
         // console.log(typeof list)
         // console.log(Boolean(null))
         // const newList=JSON.parse(list)
-        if(!prodList) setProdList(list)
-        else setProdList(prodList.sort((a,b)=>a.id-b.id));
+        // if(!prodList) setProdList(list)
+        //  setProdList(prodList.sort((a,b)=>a.id-b.id));
+        prodList && setProdList(prodList.sort((a,b)=>a.id-b.id));
 
         if(cartList) setTotalCost(cartList.sort((a,b)=>a.id-b.id))
        
