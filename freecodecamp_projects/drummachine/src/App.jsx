@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 const bankOne = [
   {
     keyCode: 81,
@@ -128,17 +127,18 @@ function App() {
     const el=bankOne.filter(x=>x.keyTrigger===t)[0]
 
     setDisplay(el.id)
-    const audio = new Audio(el.url)
-    audio.play()
+    // const audio = new Audio(el.url)
+    // audio.play()
+    t && document.getElementById(t).play();
   }
   return (
     <div className="App" id="drum-machine">
       <div id="display">{display}</div>
 
       {arr.map((x,i)=>(
-        <div key={i} className="drum-pad" id={x}  tabIndex={-1} onKeyPress={e=> handler(e,x,1) } onClick={e=>handler(e,x,2)}  >
+        <div key={i} className="drum-pad" id={x+"drum-pad"}  tabIndex={-1} onKeyPress={e=> handler(e,x,1) } onClick={e=>handler(e,x,2)}  >
             {x}
-            <audio src={x} className='clip' id={x+i}></audio>
+            <audio src={bankOne[i].url} className='clip' id={x}></audio>
         </div>
       ))}
      
