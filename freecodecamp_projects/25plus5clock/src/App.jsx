@@ -1,9 +1,62 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
+const toMMSS = num =>{
+  if(!isNaN(+num)) {
+    return num+':00'
+  }
+  else return num
+}
+
 function App() {
-  const br = useState(5)
-  , se = useState(25)
+  const [breakLength, setBreakLength] = useState(5)
+  , [sessionLength, setSessionLength] = useState(25)
+  , [run, setRun] = useState(false)
+  , [currentSession, setCurrentSession] = useState('Session')
+  , [timeLeft, setTimeLeft] = useState("25:00")
+  
+
+  const resetHandler = e => {
+    setRun(false);
+    setBreakLength(5);
+    setSessionLength(25);
+    setCurrentSession('Session')  
+  }
+
+  const stopGoHandler = e => {
+    setRun(p=>!p)
+  }
+  
+ 
+  useEffect(()=>{
+    if(run){
+      // setTimeLeft running
+      const interval = setInterval(()=>{
+        let min = timeLeft.split(':')[0]
+           ,sec = timeLeft.split(':')[1]
+           if(min > 0 || sec > 0){
+            if(sec > 0) sec--;
+            else {
+              min--;
+              sec = 60
+            } 
+           } else {
+            // change currentSession
+          }
+
+      })
+    } else {
+      // update the Length to timeleft
+      if(currentSession === 'Session'){
+        setTimeLeft(toMMSS(sessionLength))
+      } else if (currentSession === 'Break'){
+        setTimeLeft(toMMSS(breakLength))
+      }
+    }
+    
+
+  },[sessionLength, breakLength, run])
+
 
 
   return (
@@ -11,26 +64,38 @@ function App() {
       <header className="App-header">
 
         <div className="break">
-          <button id="break-increment">+</button>
+          <button id="break-increment" onClick={e=>{
+            if(breakLength<60)
+            setBreakLength(p=>+p+1)
+          }}>+</button>
           <span id="break-label">Break Length:  </span>
-          <button id="break-decrement">-</button>
-          <p id="break-length">{br}</p>
+          <button id="break-decrement" onClick={e=>{
+            if(breakLength>1)
+            setBreakLength(p=>p-1)
+          }}>-</button>
+          <p id="break-length">{breakLength}</p>
           
         </div>
 
         <div className="session">
-          <button id="session-increment">+</button>
+          <button id="session-increment" onClick={e=>{
+            if(sessionLength<60)
+             setSessionLength(p=>+p+1)
+          }}>+</button>
           <span id="session-label">Session Length</span>
-          <button id="session-decrement">-</button>
-          <p id="session-length">{se}</p>
+          <button id="session-decrement" onClick={e=>{
+            if(sessionLength>1)
+             setSessionLength(p=>p-1)
+          }}>-</button>
+          <p id="session-length">{sessionLength}</p>
         </div>
 
         <div className="timer">
-          <h2 id="timer-label">id="timer-label"</h2>
-          <h1 id="time-left">id="time-left"</h1>
+          <h2 id="timer-label">{currentSession}</h2>
+          <h1 id="time-left">{timeLeft}</h1>
 
-          <button id="start_stop">Stop/Go</button>
-          <button id="reset">Reset</button>
+          <button id="start_stop" onClick={e=>stopGoHandler(e)}>Stop/Go</button>
+          <button id="reset" onClick={e=>resetHandler(e)}>Reset</button>
         </div>
 
       
