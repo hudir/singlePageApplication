@@ -21,30 +21,36 @@ function App() {
     setRun(false);
     setBreakLength(5);
     setSessionLength(25);
-    setCurrentSession('Session')  
+    setCurrentSession('Session');
+    setTimeLeft(toMMSS(sessionLength))  
+    document.querySelector('audio').pause();
+    document.querySelector('audio').currentTime = 0;
   }
 
   const stopGoHandler = e => {
     setRun(p=>!p)
   }
   
- 
+  // setTimeLeft running
   useEffect(()=>{
-    if(run){
-      // setTimeLeft running
+    if(run){  
       const interval = setInterval(()=>{
-        let min = timeLeft.split(':')[0].split('').length >= 2 ? timeLeft.split(':')[0] : `0${timeLeft.split(':')[0]}`
-           ,sec = timeLeft.split(':')[1].split('').length >= 2 ? timeLeft.split(':')[1] : `0${timeLeft.split(':')[1]}`
-           if(min > 0 || sec > 1){
+        let min = timeLeft.split(':')[0]
+           ,sec = timeLeft.split(':')[1]
+        
+           if(min > 0 || sec > 0){
             if(sec > 0) sec--;
             else {
               min--;
               sec = 59
             }
+
+            min = min.toString().length < 2 ? `0${min}` : min
+            sec = sec.toString().length < 2 ? `0${sec}` : sec
             setTimeLeft(min+':'+sec) 
+            if(min == '00' && sec == '00') document.querySelector('audio').play()   
+            
            } else {
-            const audio = new Audio('https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3')
-             audio.play()
             // change currentSession and play the sound
             if(currentSession == 'Session') {
               setCurrentSession('Break');
@@ -59,15 +65,13 @@ function App() {
     }
   },[run, timeLeft])
 
+  // update the Length to timeleft
   useEffect(()=>{
-      // update the Length to timeleft
       if(currentSession === 'Session'){
         setTimeLeft(toMMSS(sessionLength))
       } else if (currentSession === 'Break'){
         setTimeLeft(toMMSS(breakLength))
       }
-    
- 
   },[sessionLength, breakLength,])
 
 
@@ -113,6 +117,8 @@ function App() {
 
       
       </header>
+
+      <audio src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" id="beep"></audio>
     </div>
   );
 }
